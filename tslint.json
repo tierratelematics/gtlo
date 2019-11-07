@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "arrow-parens": false,
+    "interface-name": false,
+    "max-classes-per-file": false,
+    "no-console": false,
+    "object-literal-key-quotes": false,
+    "object-literal-shorthand": false,
+    "object-literal-sort-keys": false,
+    "one-variable-per-declaration": false,
+    "ordered-imports": false,
+    "space-before-function-paren": false,
+    "trailing-comma": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "allow-leading-underscore"
+    ]
+  }
+}

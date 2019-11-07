@@ -1,0 +1,40 @@
+{
+  "name": "gtlo",
+  "description": "Get The Logs Out",
+  "keywords": [
+    "log",
+    "logging",
+    "typescript",
+    "nodejs"
+  ],
+  "author": "Andrea Ratto",
+  "version": "0.9.0",
+  "license": "Apache-2.0",
+  "repository": "github:tierratelematics/gtlo",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib/*"
+  ],
+  "scripts": {
+    "lint": "tslint --project tsconfig.json -t codeFrame 'src/**/*.ts' 'test/**/*.ts'",
+    "prebuild": "rimraf lib",
+    "build": "tsc",
+    "test": "mocha --require ts-node/register test/**/*.spec.ts",
+    "typedoc": "typedoc --out doc --theme minimal --excludeNotExported --mode file src"
+  },
+  "devDependencies": {
+    "@types/expect.js": "0.3.29",
+    "@types/mocha": "5.2.7",
+    "@types/node": "10.14.15",
+    "@types/sinon": "7.5.0",
+    "expect.js": "0.3.1",
+    "mocha": "6.2.2",
+    "rimraf": "3.0.0",
+    "sinon": "7.5.0",
+    "ts-node": "8.4.1",
+    "tslint": "5.20.1",
+    "typemoq": "2.1.0",
+    "typescript": "3.7.2"
+  }
+}

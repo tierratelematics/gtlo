@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '10'
+install:
+- npm install
+script:
+- npm test
+- npm run build
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: sysadmin@tierratelematics.com
+  api_key:
+    secure: f/KP6yES2Rv2s2/7m3S6Iv6wkVV72jV44pzVIIynoy3HN7TziZJWL7zdyA+jqi365boJ1hVWQ88Fp9kwh/DOisnN3TwJgpn5vTQOoZtcclLSMkaROjcpqVLuW8eFJcwP7HJ21IInOeMfCVmmLDje34wAERq2Vnf2G813uBsqbhQlmzXtsXh0e+hZdtr9DbrQd/h9HBGz52ObOHfeykXjFx71EvvBmUu+CB2sAaPjvbjp4DSzK0AW5ABM02d5JmGzzPQ+2WPb9li1NFaVisEzV2mU2bd4kPc92eht6zAQE9kF2QTSyoAHK7AVzscyY2K1JQioJd56JWrTT+CJ4ZCo3r2pXnmcKWHb6cJ1Rc5HVDPNmksil+rdILA4DNlIeVZKwbto1RMoucqb+aiEjpgKPy4htZ1KoRo3DLNh0PWf1GCQjomsOlayf+OT6KTibexPLMWt1yxMwXrSsCNvZfrExEKZXq/QiZrox6VNvlfWY2zisHydGLmaCxIf+Zg+cUHbsBRPKgKIOe7x9t/uS7R8cFLA2snm8KHr8vYEnswtU423H1zZ0x0eTWbMWCsRfchkBnl2J2KVnhJu94nI6VqszraTdkQfVii5MipeqmuyIJ7sICwb4g4prS9P2/gGgE+Mxa5xtrx+vBVxCj0VJE8MGGCYy0d+SUqVCeMm8oAw2Y8=
+  on:
+    repo: tierratelematics/gtlo
+    tags: true
