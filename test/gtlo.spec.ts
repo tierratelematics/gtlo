@@ -160,9 +160,10 @@ describe("Given the \"stdout\" handler", () => {
                 logger: Mock.ofType<Logger>().object,
                 level: "INFO",
                 message: "message",
-                args: [],
+                args: [42],
             });
-            expect(consoleLog.called).to.be(true);
+            expect(consoleLog.callCount).to.be(1);
+            expect(consoleLog.getCalls()[0].args).to.eql(["message", 42]);
         });
     });
 
