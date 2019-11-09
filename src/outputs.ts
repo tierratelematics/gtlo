@@ -12,6 +12,9 @@ export const OutputsRegistry: HandlerRegistry = {
     stdout: record => {
         console.log(record.message, ...record.args);
     },
+    stderr: record => {
+        console.error(record.message, ...record.args);
+    },
     console: record => {
         levelHandlers[record.level](record.message, ...record.args);
     }
