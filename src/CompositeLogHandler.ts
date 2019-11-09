@@ -1,4 +1,4 @@
-import { LogHandlerObject, LogRecord, LogHandler } from "./interfaces";
+import { LogHandler, LogHandlerObject, LogRecord } from "./interfaces";
 
 export class CompositeLogHandler implements LogHandlerObject {
 

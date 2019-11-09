@@ -1,6 +1,6 @@
 export * from "./interfaces";
-import { DefaultLoggerFactory } from "./LoggerFactory";
 import { automagic } from "./config";
+import { DefaultLoggerFactory } from "./LoggerFactory";
 
 export const loggerFactory = new DefaultLoggerFactory();
 automagic(loggerFactory);
