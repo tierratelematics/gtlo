@@ -1,6 +1,6 @@
 import expect = require("expect.js");
 import { SinonStub } from "sinon";
-import { IMock, It, Mock, Times, ExpectedCallType } from "typemoq";
+import { ExpectedCallType, IMock, It, Mock, Times } from "typemoq";
 import { FormatsRegistry } from "../src/formats";
 import { Logger, LoggerFactory, LogHandler, LogLevels, LogRecord } from "../src/interfaces";
 import { ChildLogger, RootLogger } from "../src/Logger";
@@ -225,12 +225,18 @@ describe("Given the LoggerFactory class", () => {
     context("When reconfiguring", () => {
 
         it("should update existing loggers", () => {
-            const logger = loggerFactory.getLogger("taest");
+            const logger = loggerFactory.getLogger("test");
             expect(logger.level).to.be(LogLevels.DEBUG);
-            loggerFactory.configure(
-                {loggers: {taest: "INFO"}},
-            );
+            loggerFactory.configure({loggers: {test: "INFO"}});
             expect(logger.level).to.be(LogLevels.INFO);
+            loggerFactory.reconfigure();
+            expect(logger.level).to.be(LogLevels.DEBUG);
+        });
+
+        it("should revert extraneous level changes", () => {
+            const logger = loggerFactory.getLogger("test");
+            expect(logger.level).to.be(LogLevels.DEBUG);
+            logger.level = LogLevels.DISABLED;
             loggerFactory.configure();
             expect(logger.level).to.be(LogLevels.DEBUG);
         });
@@ -284,4 +290,14 @@ describe("Given the LoggerFactory class", () => {
         });
     });
 
+    context("When listing loggers", () => {
+
+        it("should return all active loggers", () => {
+            loggerFactory.configure({loggers: {notused: "INFO"}});
+            loggerFactory.getLogger("z");
+            loggerFactory.getLogger("a.b.c");
+            const names = loggerFactory.getAllLoggers().map(l => l.name);
+            expect(names).to.eql(["a", "a.b", "a.b.c", "default", "z"]);
+        });
+    });
 });

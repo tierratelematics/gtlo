@@ -9,21 +9,24 @@ interface LoggersRegistry {
 
 export class DefaultLoggerFactory implements LoggerFactory {
 
-    private config!: EffectiveLogConfig;
+    private config: EffectiveLogConfig = DEFAULT_CONFIG;
     private readonly rootLogger = new RootLogger();
     private readonly loggers: LoggersRegistry = {};
 
-    constructor() {
-        this.configure();
+    public reconfigure(...configs: LogConfig[]): void {
+        this.config = DEFAULT_CONFIG;
+        this.configure(...configs);
     }
 
     public configure(...configs: LogConfig[]): void {
-        this.config = {
-            default: {} as Required<LogConfigEntry>,
-            handlers: {},
-            loggers: {}
-        };
-        this.mergeConfig(DEFAULT_CONFIG);
+        if (this.config === DEFAULT_CONFIG) {
+            this.config = {
+                default: {} as Required<LogConfigEntry>,
+                handlers: {},
+                loggers: {}
+            };
+            this.mergeConfig(DEFAULT_CONFIG);
+        }
         for (const config of configs) {
             this.mergeConfig(config);
         }
@@ -39,6 +42,13 @@ export class DefaultLoggerFactory implements LoggerFactory {
             name = name.name;
         }
         return this._getLogger(name);
+    }
+
+    public getAllLoggers(): Logger[] {
+        const loggers: Logger[] = [this.rootLogger];
+        loggers.push(...Object.values(this.loggers) as Logger[]);
+        loggers.sort((a, b) => a.name.localeCompare(b.name));
+        return loggers;
     }
 
     private _getLogger(name: string): BaseLogger {

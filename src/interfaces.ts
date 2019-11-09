@@ -6,8 +6,8 @@ export type LogLevel = keyof typeof LogLevels;
 export type EffectiveLogLevel = Exclude<LogLevel, "DISABLED">;
 
 export interface Logger {
-    readonly level: LogLevels;
     readonly name: string;
+    level: LogLevels;
     debug(message: string, ...args: any[]): void;
     info(message: string, ...args: any[]): void;
     warn(message: string, ...args: any[]): void;
@@ -46,5 +46,7 @@ export interface LogConfig {
 
 export interface LoggerFactory {
     configure(...configs: LogConfig[]): void;
+    reconfigure(...configs: LogConfig[]): void;
     getLogger(name: string | { name: string }): Logger;
+    getAllLoggers(): Logger[]
 }

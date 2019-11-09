@@ -1,5 +1,6 @@
-import { DEFAULT_LOGGER } from "./config";
+import { DEFAULT_CONFIG, DEFAULT_LOGGER } from "./config";
 import { EffectiveLogLevel, Logger, LogHandler, LogLevels, LogRecord } from "./interfaces";
+import { OutputsRegistry } from "./outputs";
 
 export abstract class BaseLogger implements Logger {
 
@@ -44,8 +45,8 @@ export abstract class BaseLogger implements Logger {
 
 export class RootLogger extends BaseLogger {
     public readonly name = DEFAULT_LOGGER;
-    public level!: LogLevels;
-    public handler!: LogHandler;
+    public level = LogLevels[DEFAULT_CONFIG.default.level];
+    public handler = OutputsRegistry[DEFAULT_CONFIG.default.output] as LogHandler;
 }
 
 export class ChildLogger extends BaseLogger {
@@ -67,6 +68,10 @@ export class ChildLogger extends BaseLogger {
 
     public get level(): LogLevels {
         return this._level ?? this.parent.level;
+    }
+
+    public set level(level: LogLevels) {
+        this.setLevel(level);
     }
 
     public setLevel(level: LogLevels|undefined) {
