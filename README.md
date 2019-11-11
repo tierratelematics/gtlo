@@ -4,6 +4,9 @@ A no-frills logging Typescript/Javascript library for NodeJs, because most of
 the times you just need to __Get The Logs Out__ for something else to pick them
 up.
 
+[![Build status](https://api.travis-ci.org/tierratelematics/gtlo.svg?branch=master)](https://api.travis-ci.org/tierratelematics/gtlo)
+[![npm version](https://badge.fury.io/js/gtlo.svg)](https://badge.fury.io/js/gtlo)
+
 Features:
 
 * log levels
@@ -55,8 +58,14 @@ if (this.logger.level <= LogLevels.DEBUG) {
 Good logs take dedication, but that's 95% of the story. The rest is
 configuring things to get the desired output.
 
-There's more that one way to provide configuration so that it will be picked
-up automatically.
+One can to things manually and just pass one or more `LogConfig` objects:
+
+```typescript
+loggerFactory.configure({default: {level: "INFO", format: "simple"}});
+```
+
+However there's more that one way to provide configuration so that it will be
+picked up automatically before any logger is built.
 
 The easiest is the `GTLO` environment variable:
 
@@ -77,8 +86,9 @@ In the browser, global `window` attributes serve in place of the environment.
 
 ## Why another logging library?
 
-Because we could not find a library that already had this set of features and
-not a lot more.
+Because at some point we could not find a library that already had this set of
+features and not a lot more. Today the situation is better but pack this much
+in less than 2Kb when minified and zipped.
 
 In the modern infrastructure the only thing you need to do is print to
 standard facilities. This code is meant to rely on the log management
@@ -91,7 +101,7 @@ When running in AWS Lambda, `named` and `console` will give great integration
 with Cloudwatch.
 
 Furthermore, we did not completely reinvent the wheel but took after the
-designs of Slf4j, Python's `logging` module and the javascript `console`.
+designs of Slf4j, log4j, Python's `logging` module and the javascript `console`.
 
 ## Advanced usage
 
