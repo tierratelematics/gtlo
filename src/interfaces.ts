@@ -48,5 +48,5 @@ export interface LoggerFactory {
     configure(...configs: LogConfig[]): void;
     reconfigure(...configs: LogConfig[]): void;
     getLogger(name: string | { name: string }): Logger;
-    getAllLoggers(): Logger[]
+    getAllLoggers(): Logger[];
 }

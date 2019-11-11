@@ -3,6 +3,7 @@
     "tslint:recommended"
   ],
   "rules": {
+    "member-access": true,
     "arrow-parens": false,
     "interface-name": false,
     "max-classes-per-file": false,
