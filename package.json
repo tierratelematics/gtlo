@@ -8,7 +8,7 @@
     "nodejs"
   ],
   "author": "Andrea Ratto",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "license": "Apache-2.0",
   "repository": "github:tierratelematics/gtlo",
   "main": "lib/index.js",
